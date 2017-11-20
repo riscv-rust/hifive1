@@ -1,0 +1,30 @@
+[package]
+name = "hifive"
+version = "0.1.0"
+repository = "https://github.com/dvc94ch/hifive"
+authors = ["David Craven <david@craven.ch>"]
+categories = ["embedded", "hardware-support", "no-std"]
+description = "Board support crate for hifive and lofive boards."
+keywords = ["riscv", "register", "peripheral"]
+license = "ISC"
+
+[dependencies.embedded-hal]
+git = "https://github.com/japaric/embedded-hal"
+rev = "7d904f515d15fd5fe7ea34e18820ea83e2651fa2"
+
+[dependencies.nb]
+git = "https://github.com/japaric/nb"
+
+[dependencies.e310x]
+features = ["rt"]
+version = "^0.1.1"
+
+[dependencies.riscv]
+version = "^0.1.3"
+
+[dev-dependencies.riscv-rt]
+version = "^0.1.3"
+
+[profile.release]
+debug = true
+lto = true
