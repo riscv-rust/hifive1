@@ -15,15 +15,15 @@ rev = "7d904f515d15fd5fe7ea34e18820ea83e2651fa2"
 [dependencies.nb]
 git = "https://github.com/japaric/nb"
 
+[dependencies.riscv]
+git = "https://github.com/dvc94ch/riscv"
+
+[dependencies.riscv-rt]
+git = "https://github.com/dvc94ch/riscv-rt"
+
 [dependencies.e310x]
 features = ["rt"]
-version = "^0.1.1"
-
-[dependencies.riscv]
-version = "^0.1.3"
-
-[dev-dependencies.riscv-rt]
-version = "^0.1.3"
+git = "https://github.com/dvc94ch/e310x"
 
 [profile.release]
 debug = true
