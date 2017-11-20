@@ -1,6 +1,5 @@
 #![no_std]
 #![feature(asm)]
-#![feature(core_intrinsics)]
 #![feature(get_type_id)]
 #![feature(lang_items)]
 #![feature(linkage)]
