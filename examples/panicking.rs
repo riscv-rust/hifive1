@@ -15,6 +15,5 @@ fn one() {
 }
 
 fn main() {
-    hifive::init(115_200);
     one();
 }

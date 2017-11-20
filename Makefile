@@ -5,11 +5,6 @@ EXAMPLE      := blinky_delay
 #EXAMPLE      := blinky_plic
 #EXAMPLE      := hello_world
 #EXAMPLE      := panicking
-#EXAMPLE      := heaps
-#EXAMPLE      := rtc
-#EXAMPLE      := watchdog
-#EXAMPLE      := utest
-#EXAMPLE      := rtfm
 
 # Board crate (uncomment one)
 BOARD        := hifive
@@ -47,5 +42,8 @@ openocd:
 upload:
 	openocd -f $(OPENOCD_CFG) \
 		-c "flash protect 0 64 last off; program ${EXAMPLE_BIN}; resume 0x20400000; exit"
+
+framedump:
+	riscv32-unknown-elf-readelf --debug-dump=frames $(EXAMPLE_BIN) $(ARGS)
 
 .PHONY: build clean readelf objdump framedump size gdb openocd spike
