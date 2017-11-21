@@ -1,3 +1,4 @@
+use riscv::csr;
 use riscv::interrupt::Nr;
 use e310x::PLIC;
 pub use e310x::Interrupt;
@@ -49,20 +50,23 @@ impl<'a> Copy for Plic<'a> {
 }
 
 impl<'a> Plic<'a> {
-    pub fn init(&self) {
+    /*pub fn init(&self) {
         for reg in self.0.enable.iter() {
             unsafe {
                 reg.write(|w| w.bits(0));
             }
         }
+
         //interrupt!(MachineExternal, plic::plic_handler());
+    }*/
+
+    pub fn enable_mexternal(&self) {
+        csr::mie.set(|w| w.mext());
     }
 
-    /*pub fn handler<F>(&self, f: F) where F: Fn<Interrupt> {
-            let intr = plic.claim();
-            f(intr);
-            plic.complete(intr);
-    }*/
+    pub fn clear_mexternal(&self) {
+        csr::mie.clear(|w| w.mext());
+    }
 
     pub fn is_pending(&self, intr: Interrupt) -> bool {
         let mask = 1 << (intr.nr() % 32);

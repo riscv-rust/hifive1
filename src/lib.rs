@@ -47,10 +47,6 @@ pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
     let clock = clock::CoreClock(peripherals.PRCI);
     unsafe { clock.use_external(&clint); }
 
-    // Setup PLIC
-    let plic = Plic(peripherals.PLIC);
-    plic.init();
-
     // Initialize UART0
     let serial = Serial(peripherals.UART0);
     serial.init(baud_rate.hz().invert(), peripherals.GPIO0);
@@ -82,7 +78,7 @@ pub fn trap_handler(trap: riscv::csr::Trap) {
                     let plic = Plic(peripherals.PLIC);
                     let intr = plic.claim();
 
-                    writeln!(Port(&serial), "{}", intr.nr()).unwrap();
+                    writeln!(Port(&serial), "ExternalInterrupt {}", intr.nr()).unwrap();
                     plic_trap_handler(&peripherals, &intr);
 
                     plic.complete(intr);
