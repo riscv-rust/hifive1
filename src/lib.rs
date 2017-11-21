@@ -26,6 +26,7 @@ use core::fmt::Write;
 use riscv::interrupt::Nr;
 
 pub use hal::prelude;
+pub use riscv::{csr, interrupt};
 pub use e310x::Peripherals;
 pub use clint::Clint;
 pub use led::{Red, Green, Blue};
@@ -64,7 +65,7 @@ pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
 /// necessary.
 #[used]
 #[no_mangle]
-fn trap_handler(trap: riscv::csr::Trap) {
+pub fn trap_handler(trap: riscv::csr::Trap) {
     use riscv::csr::{Trap, Interrupt};
 
     let peripherals = unsafe { e310x::Peripherals::all() };
@@ -81,18 +82,19 @@ fn trap_handler(trap: riscv::csr::Trap) {
                     let plic = Plic(peripherals.PLIC);
                     let intr = plic.claim();
 
-                    writeln!(Port(&serial), "{:?} {}", intr, intr.nr()).unwrap();
+                    writeln!(Port(&serial), "{}", intr.nr()).unwrap();
                     plic_trap_handler(&peripherals, &intr);
 
                     plic.complete(intr);
                 }
                 x => {
-                    writeln!(Port(&serial), "Interrupt {:?}", x).unwrap();
+                    writeln!(Port(&serial), "Interrupt {}", x as u32).unwrap();
                 },
             }
         },
         Trap::Exception(x) => {
-            writeln!(Port(&serial), "Exception {:?}", x).unwrap();
+            let mepc = csr::mepc.read().bits();
+            writeln!(Port(&serial), "Exception {} at 0x{:x}", x as u32, mepc).unwrap();
         },
     }
 }
@@ -100,12 +102,12 @@ fn trap_handler(trap: riscv::csr::Trap) {
 /// Default MachineTimer Trap Handler
 #[no_mangle]
 #[linkage = "weak"]
-fn mtimer_trap_handler(_: &e310x::Peripherals) {}
+pub fn mtimer_trap_handler(_: &e310x::Peripherals) {}
 
 /// Default MachineExternal Trap Handler
 #[no_mangle]
 #[linkage = "weak"]
-fn plic_trap_handler(_: &e310x::Peripherals, _: &Interrupt) {}
+pub fn plic_trap_handler(_: &e310x::Peripherals, _: &Interrupt) {}
 
 
 macro_rules! ticks_impl {

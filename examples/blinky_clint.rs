@@ -3,7 +3,7 @@
 extern crate hifive;
 
 use hifive::prelude::*;
-use hifive::{led, Blue, Clint, Peripherals, UExt};
+use hifive::{interrupt, led, Blue, Clint, Peripherals, UExt};
 
 fn main() {
     let peripherals = hifive::init(115_200);
@@ -11,6 +11,10 @@ fn main() {
 
     let timer = Clint(peripherals.CLINT);
     timer.set_timeout(1.s());
+
+    unsafe {
+        interrupt::enable();
+    }
 }
 
 #[no_mangle]

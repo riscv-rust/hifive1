@@ -2,7 +2,8 @@
 
 extern crate hifive;
 
-use hifive::{led, Red, Blue, Green, Interrupt, Plic, Channel, Pwm, Peripherals};
+use hifive::{interrupt, led, Red, Blue, Green, Interrupt, Plic,
+             Channel, Pwm, Peripherals};
 
 fn main() {
     let peripherals = hifive::init(115_200);
@@ -19,6 +20,10 @@ fn main() {
     plic.enable(Interrupt::PWM0CMP1);
     plic.enable(Interrupt::PWM0CMP2);
     plic.enable(Interrupt::PWM0CMP3);
+
+    unsafe {
+        interrupt::enable();
+    }
 }
 
 #[no_mangle]
