@@ -1,17 +1,19 @@
 # Examples (uncomment one)
-EXAMPLE      := blinky_delay
+#EXAMPLE      := blinky_delay
 #EXAMPLE      := blinky_clint
 #EXAMPLE      := blinky_pwm
 #EXAMPLE      := blinky_plic
 #EXAMPLE      := hello_world
 #EXAMPLE      := panicking
+#EXAMPLE      := pll
 
 # Board crate (uncomment one)
 BOARD        := hifive
 
 TARGET       := riscv32-unknown-none
 TARGET_DIR   := $(abspath ./target/$(TARGET)/debug)
-EXAMPLE_BIN  := $(TARGET_DIR)/examples/$(EXAMPLE)
+EXAMPLE_DIR  := $(TARGET_DIR)/examples
+EXAMPLE_BIN  := $(EXAMPLE_DIR)/$(EXAMPLE)
 OPENOCD_CFG  := $(wildcard $(TARGET_DIR)/build/$(BOARD)-*/out/openocd.cfg)
 
 build:
