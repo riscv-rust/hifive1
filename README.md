@@ -1,8 +1,13 @@
+[![crates.io](https://img.shields.io/crates/d/hifive.svg)](https://crates.io/crates/hifive)
+[![crates.io](https://img.shields.io/crates/v/hifive.svg)](https://crates.io/crates/hifive)
+
 # `hifive`
 
 > Board support crate for hifive and lofive boards.
 
-# License
+## [Documentation](https://docs.rs/crate/hifive)
+
+## License
 Copyright 2017 David Craven
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
