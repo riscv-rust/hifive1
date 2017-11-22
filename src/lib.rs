@@ -19,6 +19,7 @@ pub mod gpio;
 pub mod led;
 pub mod plic;
 pub mod pwm;
+pub mod rtc;
 pub mod serial;
 pub mod time;
 
@@ -32,6 +33,7 @@ pub use clint::Clint;
 pub use led::{Red, Green, Blue};
 pub use plic::{Priority, Interrupt, Plic};
 pub use pwm::{Align, Channel, Pwm};
+pub use rtc::{Rtc, RtcConf};
 pub use serial::{Serial, Port};
 pub use time::UExt;
 

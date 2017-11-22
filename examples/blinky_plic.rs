@@ -24,8 +24,16 @@ fn main() {
 
     let serial = Serial(p.UART0);
     let mut stdout = Port(&serial);
-    writeln!(stdout, "RTC interrupt is set {}", plic.is_enabled(Interrupt::RTC)).unwrap();
-    writeln!(stdout, "RTC interrupt nr is {}", Interrupt::RTC.nr()).unwrap();
+    writeln!(stdout, "External interrupts enabled: {}",
+             csr::mstatus.read().meie()).unwrap();
+    writeln!(stdout, "PLIC threshold priority: {}",
+             plic.get_threshold()).unwrap();
+    writeln!(stdout, "RTC interrupt number: {}",
+             Interrupt::RTC.nr()).unwrap();
+    writeln!(stdout, "RTC interrupt enabled: {}",
+             plic.is_enabled(Interrupt::RTC)).unwrap();
+    writeln!(stdout, "RTC interrupt priority: {}",
+             plic.get_priority(Interrupt::RTC)).unwrap();
 
     unsafe {
         interrupt::enable();
