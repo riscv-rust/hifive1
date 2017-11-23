@@ -15,6 +15,7 @@ impl<'a> Copy for Clint<'a> {
 }
 
 impl<'a> Clint<'a> {
+    /// Read mtime register.
     pub fn get_mtime(&self) -> ::aonclk::Ticks<u64> {
         loop {
             let hi = self.0.mtimeh.read().bits();
@@ -25,6 +26,7 @@ impl<'a> Clint<'a> {
         }
     }
 
+    /// Write mtime register.
     pub fn set_mtime(&self, time: ::aonclk::Ticks<u64>) {
         unsafe {
             self.0.mtimeh.write(|w| w.bits(time.into_hi()));
@@ -32,12 +34,14 @@ impl<'a> Clint<'a> {
         }
     }
 
+    /// Read mtimecmp register.
     pub fn get_mtimecmp(&self) -> ::aonclk::Ticks<u64> {
         let hi = self.0.mtimecmph.read().bits() as u64;
         let lo = self.0.mtimecmp.read().bits() as u64;
         ::aonclk::Ticks(hi << 32 | lo)
     }
 
+    /// Write mtimecmp register.
     pub fn set_mtimecmp(&self, time: ::aonclk::Ticks<u64>) {
         unsafe {
             self.0.mtimecmph.write(|w| w.bits(time.into_hi()));
@@ -45,6 +49,7 @@ impl<'a> Clint<'a> {
         }
     }
 
+    /// Read mcycle register.
     pub fn get_mcycle(&self) -> ::coreclk::Ticks<u64> {
         loop {
             let hi = csr::mcycleh.read().bits();
@@ -55,11 +60,13 @@ impl<'a> Clint<'a> {
         }
     }
 
+    /// Write mcycle register.
     pub fn set_mcycle(&self, cycle: ::coreclk::Ticks<u64>) {
         csr::mcycleh.write(|w| w.bits(cycle.into_hi()));
         csr::mcycle.write(|w| w.bits(cycle.into()));
     }
 
+    /// Read minstret register.
     pub fn get_minstret(&self) -> u64 {
         loop {
             let hi = csr::minstreth.read().bits();
@@ -70,27 +77,29 @@ impl<'a> Clint<'a> {
         }
     }
 
+    /// Write minstret register.
     pub fn set_minstret(&self, instret: u64) {
         csr::minstreth.write(|w| w.bits((instret >> 32) as u32));
         csr::minstret.write(|w| w.bits(instret as u32));
     }
 
 
-    /// Enable the Machine-Timer interrupt
+    /// Enable Machine-Timer interrupt.
     pub fn enable_mtimer(&self) {
         csr::mie.set(|w| w.mtimer());
     }
 
-    /// Disable the Machine-Timer interrupt
+    /// Disable Machine-Timer interrupt.
     pub fn disable_mtimer(&self) {
         csr::mie.clear(|w| w.mtimer());
     }
 
-    // Is Machine-Timer interrupt pending
+    /// Check if the Machine-Timer is interrupt pending.
     pub fn is_mtimer_pending(&self) -> bool {
         csr::mip.read().mtimer()
     }
 
+    /// Measure the coreclk frequency by counting the number of aonclk ticks.
     pub fn measure_coreclk(&self, min_ticks: ::aonclk::Ticks<u64>) -> u32 {
         interrupt::free(|_| {
             let clint = self.0;

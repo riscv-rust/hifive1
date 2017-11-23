@@ -3,6 +3,7 @@
 use core::ops::Deref;
 use e310x::gpio0;
 
+/// Enumeration of possible pin configurations.
 pub enum PinConfig {
     Input,
     InputPullup,
@@ -12,6 +13,7 @@ pub enum PinConfig {
     IoFn1,
 }
 
+/// Enumeration of pin interrupts.
 pub enum PinInterrupt {
     Rise,
     Fall,
