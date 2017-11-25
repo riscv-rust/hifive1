@@ -29,6 +29,7 @@ use riscv::interrupt::Nr;
 pub use hal::prelude;
 pub use riscv::{csr, interrupt};
 pub use e310x::Peripherals;
+pub use gpio::{PinConfig, PinInterrupt};
 pub use clint::Clint;
 pub use led::{Red, Green, Blue};
 pub use plic::{Priority, Interrupt, Plic};
