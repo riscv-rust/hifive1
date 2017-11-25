@@ -25,27 +25,28 @@ fn main() {
     let serial = Serial(p.UART0);
     let mut stdout = Port(&serial);
     writeln!(stdout, "External interrupts enabled: {}",
-             csr::mstatus.read().meie()).unwrap();
+             csr::mie.read().mext()).unwrap();
+    let threshold: u32 = plic.get_threshold().into();
     writeln!(stdout, "PLIC threshold priority: {}",
-             plic.get_threshold()).unwrap();
+             threshold).unwrap();
     writeln!(stdout, "RTC interrupt number: {}",
              Interrupt::RTC.nr()).unwrap();
     writeln!(stdout, "RTC interrupt enabled: {}",
              plic.is_enabled(Interrupt::RTC)).unwrap();
+    let priority: u32 = plic.get_priority(Interrupt::RTC).into();
     writeln!(stdout, "RTC interrupt priority: {}",
-             plic.get_priority(Interrupt::RTC)).unwrap();
+             priority).unwrap();
 
     unsafe {
         interrupt::enable();
     }
-
-    loop {}
 }
 
 #[no_mangle]
 pub fn plic_trap_handler(p: &Peripherals, intr: &Interrupt) {
     match *intr {
         Interrupt::RTC => {
+            Rtc(p.RTC).restart();
             Blue::toggle(p.GPIO0);
         },
         _ => {},
