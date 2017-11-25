@@ -1,6 +1,5 @@
 //! RTC
-use e310x::{PLIC, RTC};
-use plic::{Plic, Interrupt, Priority};
+use e310x::RTC;
 
 /// Rtc configuration
 pub struct RtcConf {
@@ -8,7 +7,6 @@ pub struct RtcConf {
     scale: u8,
     counter: u64,
     cmp: u32,
-    priority: Priority,
 }
 
 impl RtcConf {
@@ -18,7 +16,6 @@ impl RtcConf {
             scale: 0,
             counter: 0,
             cmp: 0,
-            priority: Priority::P1,
         }
     }
 
@@ -43,17 +40,8 @@ impl RtcConf {
         self
     }
 
-    pub fn set_priority(&mut self, prio: Priority) -> &mut Self {
-        self.priority = prio;
-        self
-    }
-
     pub fn end(&self, rtc: &RTC) {
-        //let plic = Plic(plic);
         let rtc = Rtc(rtc);
-
-        //plic.disable(Interrupt::RTC);
-
         unsafe {
             rtc.0.rtccfg.modify(|_, w| {
                 w.enalways().bit(self.enalways)
@@ -64,9 +52,6 @@ impl RtcConf {
             rtc.0.rtclo.write(|w| w.bits(self.counter as u32));
             rtc.0.rtccmp.write(|w| w.bits(self.cmp));
         }
-
-        //plic.set_priority(Interrupt::RTC, self.priority);
-        //plic.enable(Interrupt::RTC);
     }
 }
 
@@ -111,7 +96,7 @@ impl<'a> ::hal::Timer for Rtc<'a> {
     {
         self.pause();
         unsafe {
-            self.0.rtccmp.write(|w| w.bits(1));
+            self.0.rtccmp.write(|w| w.bits(timeout.into().into()));
         }
         self.restart();
     }
