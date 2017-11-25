@@ -28,7 +28,7 @@ impl Priority {
 }
 
 impl Into<u32> for Priority {
-    /// Returns the numeric priority for wirting to a
+    /// Returns the numeric priority for writing to a
     /// interrupt priority or the plic threshold register.
     fn into(self) -> u32 {
         match self {
@@ -93,7 +93,8 @@ impl<'a> Plic<'a> {
     pub fn init(&self) {
         for reg in self.0.enable.iter() {
             unsafe {
-                reg.write(|w| w.bits(0));
+                // bug somewhere enabling interrupts
+                reg.write(|w| w.bits(0xFFFF_FFFF));
             }
         }
         self.set_threshold(Priority::P0);
@@ -159,13 +160,15 @@ impl<'a> Plic<'a> {
 
     /// Returns the plic::Priority of a plic::Interrupt.
     pub fn get_priority(&self, intr: Interrupt) -> Priority {
-        Priority::from(self.0.priority[intr.nr() as usize].read().bits())
+        // Priority array is offset by one.
+        Priority::from(self.0.priority[intr.nr() as usize - 1].read().bits())
     }
 
     /// Sets the plic::Priority of a plic::Interrupt.
     pub fn set_priority(&self, intr: Interrupt, prio: Priority) {
+        // Priority array is offset by one.
         unsafe {
-            self.0.priority[intr.nr() as usize]
+            self.0.priority[intr.nr() as usize - 1]
                 .write(|w| w.bits(prio.into()));
         }
     }
