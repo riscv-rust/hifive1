@@ -132,6 +132,22 @@ macro_rules! pin {
                 };
             }
 
+            pub fn clear_pending<T>(gpio: &T, intr: PinInterrupt)
+                where
+                T: Deref<Target = gpio0::RegisterBlock>,
+            {
+                match intr {
+                    PinInterrupt::Rise =>
+                        gpio.rise_ip.write(|w| w.$pinx().bit(true)),
+                    PinInterrupt::Fall =>
+                        gpio.fall_ip.write(|w| w.$pinx().bit(true)),
+                    PinInterrupt::High =>
+                        gpio.high_ip.write(|w| w.$pinx().bit(true)),
+                    PinInterrupt::Low =>
+                        gpio.low_ip.write(|w| w.$pinx().bit(true)),
+                }
+            }
+
             pub fn is_interrupt_pending<T>(gpio: &T, intr: PinInterrupt) -> bool
                 where
                 T: Deref<Target = gpio0::RegisterBlock>,
