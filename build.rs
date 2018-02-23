@@ -13,12 +13,5 @@ fn main() {
     println!("cargo:rustc-link-search={}", out.display());
     println!("cargo:rerun-if-changed=memory.x");
 
-    // Copy openocd.cfg to output directory
-    File::create(out.join("openocd.cfg"))
-        .unwrap()
-        .write_all(include_bytes!("openocd.cfg"))
-        .unwrap();
-    println!("cargo:rerun-if-changed=openocd.cfg");
-
     println!("cargo:rerun-if-changed=build.rs");
 }

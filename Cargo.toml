@@ -15,16 +15,7 @@ rev = "7d904f515d15fd5fe7ea34e18820ea83e2651fa2"
 [dependencies.nb]
 git = "https://github.com/japaric/nb"
 
-[dependencies.riscv]
-git = "https://github.com/dvc94ch/riscv"
-
-[dependencies.riscv-rt]
-git = "https://github.com/dvc94ch/riscv-rt"
-
-[dependencies.e310x]
-features = ["rt"]
-git = "https://github.com/dvc94ch/e310x"
-
-[profile.release]
-debug = true
-lto = true
+[dependencies]
+riscv = { path = "../riscv" }
+riscv-rt = { path = "../riscv-rt" }
+e310x = { path = "../e310x", features = ["rt"] }
