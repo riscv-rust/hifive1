@@ -53,7 +53,6 @@ pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
     // Initialize UART0
     let serial = Serial(peripherals.UART0);
     serial.init(baud_rate.hz().invert(), peripherals.GPIO0);
-    writeln!(Port(&serial), "Initialized hifive board").unwrap();
 
     peripherals
 }
