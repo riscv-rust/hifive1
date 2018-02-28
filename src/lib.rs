@@ -10,7 +10,7 @@ extern crate embedded_hal as hal;
 #[macro_use]
 extern crate nb;
 
-extern crate riscv;
+pub extern crate riscv;
 pub extern crate e310x;
 
 pub mod clint;
@@ -22,9 +22,6 @@ pub mod pwm;
 pub mod rtc;
 pub mod serial;
 pub mod time;
-
-use core::fmt::Write;
-use riscv::interrupt::Nr;
 
 pub use hal::prelude;
 pub use riscv::{csr, interrupt};
@@ -66,33 +63,30 @@ pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
 pub fn trap_handler(trap: riscv::csr::Trap) {
     use riscv::csr::{Trap, Interrupt};
 
-    let peripherals = unsafe { e310x::Peripherals::all() };
-    let serial = Serial(peripherals.UART0);
+    let p = unsafe { e310x::Peripherals::all() };
 
     match trap {
         Trap::Interrupt(x) => {
             match x {
                 Interrupt::MachineTimer => {
-                    writeln!(Port(&serial), "MachineTimer").unwrap();
-                    mtimer_trap_handler(&peripherals);
+                    mtimer_trap_handler(&p);
                 },
                 Interrupt::MachineExternal => {
-                    let plic = Plic(peripherals.PLIC);
+                    let plic = Plic(p.PLIC);
                     let intr = plic.claim();
 
-                    writeln!(Port(&serial), "ExternalInterrupt {}", intr.nr()).unwrap();
-                    plic_trap_handler(&peripherals, &intr);
+                    plic_trap_handler(&p, &intr);
 
                     plic.complete(intr);
                 }
                 x => {
-                    writeln!(Port(&serial), "Interrupt {}", x as u32).unwrap();
+                    interrupt_trap_handler(&p, x);
                 },
             }
         },
         Trap::Exception(x) => {
             let mepc = csr::mepc.read().bits();
-            writeln!(Port(&serial), "Exception {} at 0x{:x}", x as u32, mepc).unwrap();
+            exception_trap_handler(&p, x, mepc);
         },
     }
 }
@@ -107,6 +101,18 @@ pub fn mtimer_trap_handler(_: &e310x::Peripherals) {}
 #[linkage = "weak"]
 pub fn plic_trap_handler(_: &e310x::Peripherals, _: &Interrupt) {}
 
+/// Default Interrupt Trap Handler
+///
+/// Only called when interrupt is not a MachineTimer or
+/// MachineExternal interrupt.
+#[no_mangle]
+#[linkage = "weak"]
+pub fn interrupt_trap_handler(_: &e310x::Peripherals, _: riscv::csr::Interrupt) {}
+
+/// Default Exception Trap Handler
+#[no_mangle]
+#[linkage = "weak"]
+pub fn exception_trap_handler(_: &e310x::Peripherals, _: riscv::csr::Exception, _: u32) {}
 
 macro_rules! ticks_impl {
     ($n:ident, $t:ty, $f:expr) => {
