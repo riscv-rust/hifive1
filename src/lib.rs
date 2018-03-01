@@ -4,6 +4,7 @@
 #![feature(lang_items)]
 #![feature(linkage)]
 #![feature(never_type)]
+#![feature(try_from)]
 #![feature(used)]
 
 extern crate embedded_hal as hal;
@@ -35,25 +36,6 @@ pub use rtc::{Rtc, RtcConf};
 pub use serial::{Serial, Port};
 pub use time::UExt;
 
-/// Initializes the clocks, plic and uart0. Returns Peripherals
-/// for application specific initialization.
-pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
-    let peripherals = unsafe { e310x::Peripherals::all() };
-
-    // Setup clocks
-    let clint = Clint(peripherals.CLINT);
-    let aon_clock = clock::AonClock(peripherals.AONCLK);
-    unsafe { aon_clock.use_external(); }
-    let clock = clock::CoreClock(peripherals.PRCI);
-    unsafe { clock.use_external(&clint); }
-
-    // Initialize UART0
-    let serial = Serial(peripherals.UART0);
-    serial.init(baud_rate.hz().invert(), peripherals.GPIO0);
-
-    peripherals
-}
-
 /// Default trap handler
 ///
 /// Prints trap cause and calls mtimer_trap_handler or plic_trap_handler if
@@ -63,7 +45,7 @@ pub fn init<'a>(baud_rate: u32) -> e310x::Peripherals<'a> {
 pub fn trap_handler(trap: riscv::csr::Trap) {
     use riscv::csr::{Trap, Interrupt};
 
-    let p = unsafe { e310x::Peripherals::all() };
+    let p = e310x::Peripherals::take().unwrap();
 
     match trap {
         Trap::Interrupt(x) => {
@@ -72,7 +54,7 @@ pub fn trap_handler(trap: riscv::csr::Trap) {
                     mtimer_trap_handler(&p);
                 },
                 Interrupt::MachineExternal => {
-                    let plic = Plic(p.PLIC);
+                    let plic = Plic(&p.PLIC);
                     let intr = plic.claim();
 
                     plic_trap_handler(&p, &intr);

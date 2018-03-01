@@ -1,3 +1,4 @@
+use core::convert::TryFrom;
 use riscv::csr;
 use riscv::interrupt::Nr;
 use e310x::PLIC;
@@ -147,7 +148,7 @@ impl<'a> Plic<'a> {
 
     /// Claims the plic::Interrupt with the highest priority.
     pub fn claim(&self) -> Interrupt {
-        Interrupt::from(self.0.claim.read().bits() as u8)
+        Interrupt::try_from(self.0.claim.read().bits() as u8).unwrap()
     }
 
     /// Notifies the PLIC that the claimed plic::Interrupt is
@@ -159,18 +160,19 @@ impl<'a> Plic<'a> {
     }
 
     /// Returns the plic::Priority of a plic::Interrupt.
-    pub fn get_priority(&self, intr: Interrupt) -> Priority {
+    pub fn get_priority(&self, _intr: Interrupt) -> Priority {
         // Priority array is offset by one.
-        Priority::from(self.0.priority[intr.nr() as usize - 1].read().bits())
+        Priority::from(0)
+        //Priority::from(self.0.priority[intr.nr() as usize - 1].read().bits())
     }
 
     /// Sets the plic::Priority of a plic::Interrupt.
-    pub fn set_priority(&self, intr: Interrupt, prio: Priority) {
+    pub fn set_priority(&self, _intr: Interrupt, _prio: Priority) {
         // Priority array is offset by one.
-        unsafe {
+        /*unsafe {
             self.0.priority[intr.nr() as usize - 1]
                 .write(|w| w.bits(prio.into()));
-        }
+        }*/
     }
 
     /// Returns the PLIC threshold priority.
