@@ -8,14 +8,7 @@ description = "Board support crate for hifive and lofive boards."
 keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 
-[dependencies.embedded-hal]
-git = "https://github.com/japaric/embedded-hal"
-rev = "7d904f515d15fd5fe7ea34e18820ea83e2651fa2"
-
-[dependencies.nb]
-git = "https://github.com/japaric/nb"
-
 [dependencies]
 riscv = { path = "../riscv" }
 riscv-rt = { path = "../riscv-rt" }
-e310x = { path = "../e310x", features = ["rt"] }
+e310x-hal = { path = "../e310x-hal", features = ["pll", "hfxosc", "lfaltclk"] }
