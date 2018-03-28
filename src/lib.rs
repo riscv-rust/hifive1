@@ -6,8 +6,8 @@
 
 pub extern crate e310x_hal as hal;
 
-pub use serial::{TX, RX, tx_rx};
-pub use led::{RED, GREEN, BLUE, rgb};
+pub use serial::{TX, RX, TxPin, RxPin, tx_rx};
+pub use led::{RED, GREEN, BLUE, rgb, Led};
 
 pub mod serial {
     //! Single UART hooked up to FTDI
@@ -16,21 +16,27 @@ pub mod serial {
     //! - Rx = Pin 16
     use hal::gpio::gpio0::{Pin16, Pin17, OUT_XOR, IOF_SEL, IOF_EN};
     use hal::gpio::{IOF0, NoInvert};
+    use hal::serial::{Tx, Rx};
+    use hal::e310x::UART0;
 
     /// UART0 TX Pin
-    pub type TX = Pin17<IOF0<NoInvert>>;
+    pub type TxPin = Pin17<IOF0<NoInvert>>;
     /// UART0 RX Pin
-    pub type RX = Pin16<IOF0<NoInvert>>;
+    pub type RxPin = Pin16<IOF0<NoInvert>>;
+    /// UART0 TX
+    pub type TX = Tx<UART0>;
+    /// UART0 RX
+    pub type RX = Rx<UART0>;
 
     /// Return TX, RX pins.
     pub fn tx_rx<X, Y>(
         tx: Pin17<X>, rx: Pin16<Y>,
         out_xor: &mut OUT_XOR, iof_sel: &mut IOF_SEL,
         iof_en: &mut IOF_EN
-    ) -> (TX, RX)
+    ) -> (TxPin, RxPin)
     {
-        let tx: TX = tx.into_iof0(out_xor, iof_sel, iof_en);
-        let rx: RX = rx.into_iof0(out_xor, iof_sel, iof_en);
+        let tx: TxPin = tx.into_iof0(out_xor, iof_sel, iof_en);
+        let rx: RxPin = rx.into_iof0(out_xor, iof_sel, iof_en);
         (tx, rx)
     }
 }
