@@ -1,5 +1,6 @@
 [![crates.io](https://img.shields.io/crates/d/hifive.svg)](https://crates.io/crates/hifive)
 [![crates.io](https://img.shields.io/crates/v/hifive.svg)](https://crates.io/crates/hifive)
+[![Build Status](https://travis-ci.org/riscv-rust/hifive.svg?branch=master)](https://travis-ci.org/riscv-rust/hifive)
 
 # `hifive`
 
@@ -8,7 +9,8 @@
 ## [Documentation](https://docs.rs/crate/hifive)
 
 ## License
-Copyright 2017 David Craven
+
+Copyright 2018 [RISCV team][team]
 
 Permission to use, copy, modify, and/or distribute this software for any purpose
 with or without fee is hereby granted, provided that the above copyright notice
@@ -21,3 +23,12 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
 OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
 TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
 THIS SOFTWARE.
+
+## Code of Conduct
+
+Contribution to this crate is organized under the terms of the [Rust Code of
+Conduct][CoC], the maintainer of this crate, the [RISCV team][team], promises
+to intervene to uphold that code of conduct.
+
+[CoC]: CODE_OF_CONDUCT.md
+[team]: https://github.com/rust-embedded/wg#the-riscv-team
