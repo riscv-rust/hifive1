@@ -1,7 +1,7 @@
 [package]
 name = "hifive"
-version = "0.1.0"
-repository = "https://github.com/dvc94ch/hifive"
+version = "0.2.0"
+repository = "https://github.com/riscv-rust/hifive"
 authors = ["David Craven <david@craven.ch>"]
 categories = ["embedded", "hardware-support", "no-std"]
 description = "Board support crate for hifive and lofive boards."
@@ -9,6 +9,6 @@ keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 
 [dependencies]
-riscv = { path = "../riscv" }
-riscv-rt = { path = "../riscv-rt" }
-e310x-hal = { path = "../e310x-hal", features = ["pll", "hfxosc", "lfaltclk"] }
+riscv = "0.3.0"
+riscv-rt = "0.3.0"
+e310x-hal = { version = "0.2.0", features = ["pll", "hfxosc", "lfaltclk"] }
