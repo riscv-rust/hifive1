@@ -6,11 +6,11 @@
 
 pub extern crate e310x_hal as hal;
 
-pub use serial::{TX, RX, TxPin, RxPin, tx_rx};
-#[cfg(feature = "board-hifive1")]
-pub use led::{RED, GREEN, BLUE, rgb, Led};
-
-pub mod serial;
+pub mod clock;
 #[cfg(feature = "board-hifive1")]
 pub mod led;
-pub mod clock;
+pub mod serial;
+
+#[cfg(feature = "board-hifive1")]
+pub use led::{RED, GREEN, BLUE, rgb, Led};
+pub use serial::{TX, RX, TxPin, RxPin, tx_rx};
