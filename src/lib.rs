@@ -11,3 +11,4 @@ pub use led::{RED, GREEN, BLUE, rgb, Led};
 
 pub mod serial;
 pub mod led;
+pub mod clock;
