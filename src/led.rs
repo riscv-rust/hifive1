@@ -55,31 +55,31 @@ pub trait Led {
 }
 
 impl Led for RED {
-    fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
-    }
-
     fn off(&mut self) {
         _embedded_hal_digital_OutputPin::set_low(self);
+    }
+
+    fn on(&mut self) {
+        _embedded_hal_digital_OutputPin::set_high(self);
     }
 }
 
 impl Led for GREEN {
-    fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
-    }
-
     fn off(&mut self) {
         _embedded_hal_digital_OutputPin::set_low(self);
+    }
+
+    fn on(&mut self) {
+        _embedded_hal_digital_OutputPin::set_high(self);
     }
 }
 
 impl Led for BLUE {
-    fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
-    }
-
     fn off(&mut self) {
         _embedded_hal_digital_OutputPin::set_low(self);
+    }
+
+    fn on(&mut self) {
+        _embedded_hal_digital_OutputPin::set_high(self);
     }
 }
