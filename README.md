@@ -4,7 +4,7 @@
 
 # `hifive`
 
-> Board support crate for hifive and lofive boards.
+> Board support crate for HiFive1 and LoFive boards
 
 ## [Documentation](https://docs.rs/crate/hifive)
 
