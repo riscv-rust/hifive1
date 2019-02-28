@@ -1,4 +1,4 @@
-//! Board support crate for the Hifive
+//! Board support crate for HiFive1 and LoFive boards
 
 #![deny(missing_docs)]
 #![deny(warnings)]

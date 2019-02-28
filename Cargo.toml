@@ -4,7 +4,7 @@ version = "0.2.0"
 repository = "https://github.com/riscv-rust/hifive"
 authors = ["David Craven <david@craven.ch>"]
 categories = ["embedded", "hardware-support", "no-std"]
-description = "Board support crate for hifive and lofive boards."
+description = "Board support crate for HiFive1 and LoFive boards"
 keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 
