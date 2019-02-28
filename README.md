@@ -1,12 +1,12 @@
-[![crates.io](https://img.shields.io/crates/d/hifive.svg)](https://crates.io/crates/hifive)
-[![crates.io](https://img.shields.io/crates/v/hifive.svg)](https://crates.io/crates/hifive)
-[![Build Status](https://travis-ci.org/riscv-rust/hifive.svg?branch=master)](https://travis-ci.org/riscv-rust/hifive)
+[![crates.io](https://img.shields.io/crates/d/hifive1.svg)](https://crates.io/crates/hifive1)
+[![crates.io](https://img.shields.io/crates/v/hifive1.svg)](https://crates.io/crates/hifive1)
+[![Build Status](https://travis-ci.org/riscv-rust/hifive1.svg?branch=master)](https://travis-ci.org/riscv-rust/hifive1)
 
-# `hifive`
+# `hifive1`
 
 > Board support crate for HiFive1 and LoFive boards
 
-## [Documentation](https://docs.rs/crate/hifive)
+## [Documentation](https://docs.rs/crate/hifive1)
 
 ## License
 
