@@ -1,6 +1,6 @@
 [package]
 name = "hifive1"
-version = "0.3.0"
+version = "0.4.0"
 repository = "https://github.com/riscv-rust/hifive1"
 authors = ["David Craven <david@craven.ch>"]
 categories = ["embedded", "hardware-support", "no-std"]
