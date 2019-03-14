@@ -9,8 +9,6 @@ keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 
 [dependencies]
-riscv = "0.4.0"
-riscv-rt = "0.4.0"
 e310x-hal = "0.3.0"
 
 [features]
