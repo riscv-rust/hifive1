@@ -11,15 +11,12 @@ rust:
 if: (branch = staging OR branch = trying OR branch = master) OR (type = pull_request AND branch = master)
 
 
-before_install: set -e
-
 install:
   - bash ci/install.sh
 
 script:
   - bash ci/script.sh
 
-after_script: set +e
 
 cache: cargo
 before_cache:
