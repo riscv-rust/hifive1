@@ -12,10 +12,10 @@ if: (branch = staging OR branch = trying OR branch = master) OR (type = pull_req
 
 
 install:
-  - bash ci/install.sh
+  - ci/install.sh
 
 script:
-  - bash ci/script.sh
+  - ci/script.sh
 
 
 cache: cargo
