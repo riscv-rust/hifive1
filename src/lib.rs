@@ -1,7 +1,6 @@
 //! Board support crate for HiFive1 and LoFive boards
 
 #![deny(missing_docs)]
-#![deny(warnings)]
 #![no_std]
 
 pub extern crate e310x_hal as hal;
