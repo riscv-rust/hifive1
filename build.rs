@@ -10,4 +10,8 @@ fn main() {
     fs::File::create(out_dir.join("memory-hifive1.x")).unwrap()
         .write_all(include_bytes!("memory-hifive1.x")).unwrap();
     println!("cargo:rerun-if-changed=memory-hifive1.x");
+
+    fs::File::create(out_dir.join("memory-hifive1-revb.x")).unwrap()
+        .write_all(include_bytes!("memory-hifive1-revb.x")).unwrap();
+    println!("cargo:rerun-if-changed=memory-hifive1-revb.x");
 }
