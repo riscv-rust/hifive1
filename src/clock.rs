@@ -1,16 +1,17 @@
 //! Board-specific clock configuration
 
-#[cfg(any(feature = "board-hifive1", feature = "board-lofive"))]
+#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb", feature = "board-lofive"))]
 use hal::{
     e310x::{PRCI, AONCLK},
     clock::{Clocks, PrciExt, AonExt},
     time::Hertz,
 };
 
-#[cfg(feature = "board-hifive1")]
+#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 /// Configures clock generation system.
 ///
-/// For HiFive1 board external oscillators are enabled for both high-frequency and low-frequency clocks.
+/// For HiFive1 and HiFive1 Rev B boards external oscillators are enabled for
+/// both high-frequency and low-frequency clocks.
 pub fn configure(prci: PRCI, aonclk: AONCLK, target_coreclk: Hertz) -> Clocks {
     let coreclk = prci.constrain();
     let coreclk = coreclk.use_external(Hertz(16_000_000)).coreclk(target_coreclk);

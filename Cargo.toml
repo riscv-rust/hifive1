@@ -14,7 +14,8 @@ embedded-hal = "0.2.3"
 
 [features]
 board-hifive1 = []
+board-hifive1-revb = ["e310x-hal/g002"]
 board-lofive = []
 
 [package.metadata.docs.rs]
-features = ['board-hifive1']
+features = ['board-hifive1-revb']
