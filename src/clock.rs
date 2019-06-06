@@ -1,6 +1,5 @@
 //! Board-specific clock configuration
 
-#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb", feature = "board-lofive"))]
 use hal::{
     e310x::{PRCI, AONCLK},
     clock::{Clocks, PrciExt, AonExt},
