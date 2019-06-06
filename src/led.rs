@@ -3,7 +3,7 @@
 //! - Red = Pin 22
 //! - Green = Pin 19
 //! - Blue = Pin 21
-use hal::prelude::*;
+use embedded_hal::digital::v2::OutputPin;
 use hal::gpio::gpio0::{Pin19, Pin21, Pin22, OUTPUT_EN, DRIVE,
                        OUT_XOR, IOF_EN};
 use hal::gpio::{Output, Regular, Invert};
@@ -56,30 +56,30 @@ pub trait Led {
 
 impl Led for RED {
     fn off(&mut self) {
-        _embedded_hal_digital_OutputPin::set_low(self);
+        self.set_low().unwrap();
     }
 
     fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
+        self.set_high().unwrap();
     }
 }
 
 impl Led for GREEN {
     fn off(&mut self) {
-        _embedded_hal_digital_OutputPin::set_low(self);
+        self.set_low().unwrap();
     }
 
     fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
+        self.set_high().unwrap();
     }
 }
 
 impl Led for BLUE {
     fn off(&mut self) {
-        _embedded_hal_digital_OutputPin::set_low(self);
+        self.set_low().unwrap();
     }
 
     fn on(&mut self) {
-        _embedded_hal_digital_OutputPin::set_high(self);
+        self.set_high().unwrap();
     }
 }

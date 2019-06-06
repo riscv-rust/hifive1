@@ -4,6 +4,7 @@
 #![no_std]
 
 pub extern crate e310x_hal as hal;
+extern crate embedded_hal;
 
 pub mod clock;
 #[cfg(feature = "board-hifive1")]
