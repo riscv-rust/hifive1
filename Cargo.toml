@@ -12,6 +12,8 @@ edition = "2018"
 [dependencies]
 e310x-hal = "0.6.0"
 embedded-hal = "0.2.3"
+riscv = "0.5.2"
+nb = "0.1.2"
 
 [features]
 board-hifive1 = []

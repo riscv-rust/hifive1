@@ -6,10 +6,11 @@
 pub use e310x_hal as hal;
 
 pub mod clock;
-#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
-pub mod led;
-pub mod serial;
 
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
+pub mod led;
+#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 pub use led::{RED, GREEN, BLUE, rgb, Led};
-pub use serial::{TX, RX, TxPin, RxPin, tx_rx};
+
+pub mod stdout;
+pub use stdout::configure as configure_stdout;
