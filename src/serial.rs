@@ -2,10 +2,10 @@
 //!
 //! - Tx = Pin 17
 //! - Rx = Pin 16
-use hal::gpio::gpio0::{Pin16, Pin17, OUT_XOR, IOF_SEL, IOF_EN};
-use hal::gpio::{IOF0, NoInvert};
-use hal::serial::{Tx, Rx};
-use hal::e310x::UART0;
+use e310x_hal::gpio::gpio0::{Pin16, Pin17, OUT_XOR, IOF_SEL, IOF_EN};
+use e310x_hal::gpio::{IOF0, NoInvert};
+use e310x_hal::serial::{Tx, Rx};
+use e310x_hal::e310x::UART0;
 
 /// UART0 TX Pin
 pub type TxPin = Pin17<IOF0<NoInvert>>;

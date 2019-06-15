@@ -3,8 +3,7 @@
 #![deny(missing_docs)]
 #![no_std]
 
-pub extern crate e310x_hal as hal;
-extern crate embedded_hal;
+pub use e310x_hal as hal;
 
 pub mod clock;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]

@@ -4,9 +4,9 @@
 //! - Green = Pin 19
 //! - Blue = Pin 21
 use embedded_hal::digital::v2::OutputPin;
-use hal::gpio::gpio0::{Pin19, Pin21, Pin22, OUTPUT_EN, DRIVE,
+use e310x_hal::gpio::gpio0::{Pin19, Pin21, Pin22, OUTPUT_EN, DRIVE,
                        OUT_XOR, IOF_EN};
-use hal::gpio::{Output, Regular, Invert};
+use e310x_hal::gpio::{Output, Regular, Invert};
 
 /// Red LED
 pub type RED = Pin22<Output<Regular<Invert>>>;

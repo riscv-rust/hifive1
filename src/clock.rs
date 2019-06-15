@@ -1,6 +1,6 @@
 //! Board-specific clock configuration
 
-use hal::{
+use e310x_hal::{
     e310x::{PRCI, AONCLK},
     clock::{Clocks, PrciExt, AonExt},
     time::Hertz,
