@@ -2,7 +2,7 @@
 //!
 //! - Tx = Pin 17
 //! - Rx = Pin 16
-use e310x_hal::gpio::gpio0::{Pin16, Pin17, OUT_XOR, IOF_SEL, IOF_EN};
+use e310x_hal::gpio::gpio0::{Pin16, Pin17};
 use e310x_hal::gpio::{IOF0, NoInvert};
 use e310x_hal::serial::{Tx, Rx};
 use e310x_hal::e310x::UART0;
@@ -18,12 +18,10 @@ pub type RX = Rx<UART0>;
 
 /// Return TX, RX pins.
 pub fn tx_rx<X, Y>(
-    tx: Pin17<X>, rx: Pin16<Y>,
-    out_xor: &mut OUT_XOR, iof_sel: &mut IOF_SEL,
-    iof_en: &mut IOF_EN
+    tx: Pin17<X>, rx: Pin16<Y>
 ) -> (TxPin, RxPin)
 {
-    let tx: TxPin = tx.into_iof0(out_xor, iof_sel, iof_en);
-    let rx: RxPin = rx.into_iof0(out_xor, iof_sel, iof_en);
+    let tx: TxPin = tx.into_iof0();
+    let rx: RxPin = rx.into_iof0();
     (tx, rx)
 }

@@ -4,8 +4,7 @@
 //! - Green = Pin 19
 //! - Blue = Pin 21
 use embedded_hal::digital::v2::OutputPin;
-use e310x_hal::gpio::gpio0::{Pin19, Pin21, Pin22, OUTPUT_EN, DRIVE,
-                       OUT_XOR, IOF_EN};
+use e310x_hal::gpio::gpio0::{Pin19, Pin21, Pin22};
 use e310x_hal::gpio::{Output, Regular, Invert};
 
 /// Red LED
@@ -19,29 +18,12 @@ pub type BLUE = Pin21<Output<Regular<Invert>>>;
 
 /// Returns RED, GREEN and BLUE LEDs.
 pub fn rgb<X, Y, Z>(
-    red: Pin22<X>, green: Pin19<Y>, blue: Pin21<Z>,
-    output_en: &mut OUTPUT_EN, drive: &mut DRIVE,
-    out_xor: &mut OUT_XOR, iof_en: &mut IOF_EN
+    red: Pin22<X>, green: Pin19<Y>, blue: Pin21<Z>
 ) -> (RED, GREEN, BLUE)
 {
-    let red: RED = red.into_inverted_output(
-        output_en,
-        drive,
-        out_xor,
-        iof_en,
-    );
-    let green: GREEN = green.into_inverted_output(
-        output_en,
-        drive,
-        out_xor,
-        iof_en,
-    );
-    let blue: BLUE = blue.into_inverted_output(
-        output_en,
-        drive,
-        out_xor,
-        iof_en,
-    );
+    let red: RED = red.into_inverted_output();
+    let green: GREEN = green.into_inverted_output();
+    let blue: BLUE = blue.into_inverted_output();
     (red, green, blue)
 }
 
