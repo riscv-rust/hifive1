@@ -1,9 +1,19 @@
 ///
-/// HiFive1 PIN mappings (alias -> GPIO.pinX)
+/// Returns single pin for given gpio object mapped accordingly
+/// 
+/// *mappings*
+/// 
+///     - spi_<what> -- SPI pins where <what> is one of (sck, mosi, miso, ss0, ss2, ss3)
+///     - i2c_<what> -- I2C pins where <what> is one of (sda, scl)
+///     - serial_<what> -- Serial pins where <what> is one of (tx, rx)
+///     - dig# -- Digital/physical pins on the board where # is from range <0..19>
+/// 
+/// *example*
+/// 
+/// `pin!(gpio.spi_mosi) -> gpio.pin3`
 /// 
 #[macro_export]
-#[doc(hidden)]
-macro_rules! pin_name {
+macro_rules! pin {
     // empty
     ($gpio:ident, none) => { () };
     // spi
@@ -41,27 +51,6 @@ macro_rules! pin_name {
     ($gpio:ident, dig17) => { $gpio.pin11 };
     ($gpio:ident, dig18) => { $gpio.pin12 };
     ($gpio:ident, dig19) => { $gpio.pin13 };
-}
-
-///
-/// Returns single pin for given gpio object mapped accordingly
-/// 
-/// *mappings*
-/// 
-///     - spi_<what> -- SPI pins where <what> is one of (sck, mosi, miso, ss0, ss2, ss3)
-///     - i2c_<what> -- I2C pins where <what> is one of (sda, scl)
-///     - serial_<what> -- Serial pins where <what> is one of (tx, rx)
-///     - dig# -- Digital/physical pins on the board where # is from range <0..19>
-/// 
-/// *example*
-/// 
-/// `pin!(gpio.spi_mosi) -> gpio.pin3`
-/// 
-#[macro_export]
-macro_rules! pin {
-    ($gpio:ident.$name:ident) => {
-        $crate::pin_name!($gpio, $name)
-    }
 }
 
 ///
