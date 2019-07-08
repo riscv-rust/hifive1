@@ -5,7 +5,7 @@
 /// 
 ///   - `spi0_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
 ///   - `i2c0_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
-///   - `uart0_<x>` — Serial pins where <x> is one of (`tx`, `rx`)
+///   - `uart0_<x>` — UART pins where <x> is one of (`tx`, `rx`)
 ///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
 /// 
 /// # Example
@@ -63,7 +63,7 @@ macro_rules! pin {
 ///   - `none` — Returns `()` for empty pin if needed in tuple
 ///   - `spi0_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
 ///   - `i2c0_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
-///   - `uart0_<x>` — Serial pins where <x> is one of (`tx`, `rx`)
+///   - `uart0_<x>` — UART pins where <x> is one of (`tx`, `rx`)
 ///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
 /// 
 /// # Example
