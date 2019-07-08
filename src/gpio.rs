@@ -4,6 +4,7 @@
 /// Hifive1 PIN mappings (alias -> GPIO.pinX)
 /// 
 #[macro_export]
+#[doc(hidden)]
 macro_rules! pin_name {
     // empty
     ($gpio:ident, none) => { () };
