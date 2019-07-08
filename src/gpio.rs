@@ -1,7 +1,5 @@
-//! GPIO Pin mapping macros crate
-
 ///
-/// Hifive1 PIN mappings (alias -> GPIO.pinX)
+/// HiFive1 PIN mappings (alias -> GPIO.pinX)
 /// 
 #[macro_export]
 #[doc(hidden)]
@@ -79,7 +77,7 @@ macro_rules! pin {
 /// 
 /// *example*
 /// 
-/// `pin!(gpio.spi_mosi) -> gpio.pin3`
+/// `pins!(gpio, (spi_mosi, spi_miso, spi_sck, spi_ss0)) -> (gpio.pin3, gpio.pin4, gpio.pin5, gpio.pin2)`
 /// 
 #[macro_export]
 macro_rules! pins {
