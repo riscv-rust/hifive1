@@ -18,3 +18,5 @@ pub use board::BoardResources;
 
 pub mod stdout;
 pub use stdout::configure as configure_stdout;
+
+pub mod gpio;
