@@ -1,16 +1,18 @@
 ///
 /// Returns single pin for given gpio object mapped accordingly
 /// 
-/// *mappings*
+/// # Mappings
 /// 
-///     - spi_<what> -- SPI pins where <what> is one of (sck, mosi, miso, ss0, ss2, ss3)
-///     - i2c_<what> -- I2C pins where <what> is one of (sda, scl)
-///     - serial_<what> -- Serial pins where <what> is one of (tx, rx)
-///     - dig# -- Digital/physical pins on the board where # is from range <0..19>
+///   - `spi_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
+///   - `i2c_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
+///   - `serial_<x>` — Serial pins where <x> is one of (`tx`, `rx`)
+///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
 /// 
-/// *example*
+/// # Example
 /// 
-/// `pin!(gpio.spi_mosi) -> gpio.pin3`
+/// ```
+/// let mosi = pin!(gpio, spi_mosi); // gpio.pin3
+/// ```
 /// 
 #[macro_export]
 macro_rules! pin {
@@ -56,17 +58,20 @@ macro_rules! pin {
 ///
 /// Returns tuple of pins for given gpio object mapped accordingly
 /// 
-/// *mappings*
+/// # Mappings
 /// 
-///     - none -- Returns () for empty pin if needed in tuple
-///     - spi_<what> -- SPI pins where <what> is one of (sck, mosi, miso, ss0, ss2, ss3)
-///     - i2c_<what> -- I2C pins where <what> is one of (sda, scl)
-///     - serial_<what> -- Serial pins where <what> is one of (tx, rx)
-///     - dig# -- Digital/physical pins on the board where # is from range <0..19>
+///   - `none` — Returns `()` for empty pin if needed in tuple
+///   - `spi_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
+///   - `i2c_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
+///   - `serial_<x>` — Serial pins where <x> is one of (`tx`, `rx`)
+///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
 /// 
-/// *example*
+/// # Example
 /// 
-/// `pins!(gpio, (spi_mosi, spi_miso, spi_sck, spi_ss0)) -> (gpio.pin3, gpio.pin4, gpio.pin5, gpio.pin2)`
+/// ```
+/// let (mosi, miso, sck, cs) = pins!(gpio, (spi_mosi, spi_miso, spi_sck, spi_ss0));
+/// // (gpio.pin3, gpio.pin4, gpio.pin5, gpio.pin2)
+/// ```
 /// 
 #[macro_export]
 macro_rules! pins {
