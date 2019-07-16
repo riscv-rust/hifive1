@@ -5,8 +5,9 @@
 /// 
 ///   - `spi0_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
 ///   - `i2c0_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
-///   - `uart0_<x>` — UART pins where <x> is one of (`tx`, `rx`)
+///   - `uart0_<x>` — UART pins where `<x>` is one of (`tx`, `rx`)
 ///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
+///   - `led_<x>` - Internal LED light pins where `<x>` is one of (`red`, `green`, `blue`)
 /// 
 /// # Example
 /// 
@@ -53,6 +54,11 @@ macro_rules! pin {
     ($gpio:ident, dig17) => { $gpio.pin11 };
     ($gpio:ident, dig18) => { $gpio.pin12 };
     ($gpio:ident, dig19) => { $gpio.pin13 };
+    // internal LED
+    ($gpio:ident, led_red) => { $gpio.pin22 };
+    ($gpio:ident, led_green) => { $gpio.pin19 };
+    ($gpio:ident, led_blue) => { $gpio.pin21 };
+
 }
 
 ///
@@ -63,8 +69,9 @@ macro_rules! pin {
 ///   - `none` — Returns `()` for empty pin if needed in tuple
 ///   - `spi0_<x>` — SPI pins where `<x>` is one of (`sck`, `mosi`, `miso`, `ss0`, `ss2`, `ss3`)
 ///   - `i2c0_<x>` — I2C pins where `<x>` is one of (`sda`, `scl`)
-///   - `uart0_<x>` — UART pins where <x> is one of (`tx`, `rx`)
+///   - `uart0_<x>` — UART pins where `<x>` is one of (`tx`, `rx`)
 ///   - `dig#` — Digital/physical pins on the board where `#` is from range 0..19
+///   - `led_<x>` - Internal LED light pins `<x>` is one of (`red`, `green`, `blue`)
 /// 
 /// # Example
 /// 
@@ -76,6 +83,6 @@ macro_rules! pin {
 #[macro_export]
 macro_rules! pins {
     ( $gpio:ident, ($($name:ident),+) ) => {
-        ($($crate::pin_name!($gpio, $name)),+)
+        ($($crate::pin!($gpio, $name)),+)
     }
 }
