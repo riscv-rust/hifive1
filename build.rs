@@ -25,15 +25,17 @@ fn main() {
 
     match board.as_str() {
         "hifive1" => {
-            fs::copy("memory-hifive1.x", out_dir.join("memory.x")).unwrap();
+            fs::copy("memory-hifive1.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1.x");
         }
         "hifive1_revb" => {
-            fs::copy("memory-hifive1-revb.x", out_dir.join("memory.x")).unwrap();
+            fs::copy("memory-hifive1-revb.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1-revb.x");
         }
         "lofive" => {}
 
         other => panic!("Unknown board: {}", other),
     }
+
+    fs::copy("hifive1-link.x", out_dir.join("hifive1-link.x")).unwrap();
 }
