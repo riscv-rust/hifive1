@@ -26,7 +26,7 @@ macro_rules! pin {
     ($gpio:ident, spi0_ss0) => { $gpio.pin2 };
     // spi_ss1 is not documented
     ($gpio:ident, spi0_ss2) => { $gpio.pin9 };
-    ($gpio:ident, spi0_cs3) => { $gpio.pin10 };
+    ($gpio:ident, spi0_ss3) => { $gpio.pin10 };
     // i2c
     ($gpio:ident, i2c0_sda) => { $gpio.pin12 };
     ($gpio:ident, i2c0_scl) => { $gpio.pin13 };
