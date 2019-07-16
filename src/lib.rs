@@ -13,9 +13,6 @@ pub mod led;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 pub use led::{RED, GREEN, BLUE, rgb, Led};
 
-pub mod board;
-pub use board::BoardResources;
-
 pub mod stdout;
 pub use stdout::configure as configure_stdout;
 
