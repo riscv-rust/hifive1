@@ -31,7 +31,6 @@ pub fn configure(prci: PRCI, aonclk: AONCLK, target_coreclk: Hertz) -> Clocks {
     let coreclk = coreclk.use_external(Hertz(16_000_000)).coreclk(target_coreclk);
 
     let aonclk = aonclk.constrain();
-    let aonclk = aonclk.use_external(Hertz(32_768));
 
     Clocks::freeze(coreclk, aonclk)
 }
