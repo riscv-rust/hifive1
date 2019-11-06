@@ -21,11 +21,11 @@ pub fn configure(prci: PRCI, aonclk: AONCLK, target_coreclk: Hertz) -> Clocks {
     Clocks::freeze(coreclk, aonclk)
 }
 
-#[cfg(feature = "board-lofive")]
+#[cfg(any(feature = "board-lofive", feature = "board-lofive-r1"))]
 /// Configures clock generation system.
 ///
-/// For LoFive board external oscillator is enabled for high-frequency clock.
-/// For low-frequency clock internal oscillator is used.
+/// For the LoFive and LoFive R1 boards, external oscillator is enabled for
+/// high-frequency clock. For low-frequency clock internal oscillator is used.
 pub fn configure(prci: PRCI, aonclk: AONCLK, target_coreclk: Hertz) -> Clocks {
     let coreclk = prci.constrain();
     let coreclk = coreclk.use_external(Hertz(16_000_000)).coreclk(target_coreclk);
