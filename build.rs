@@ -34,10 +34,8 @@ fn main() {
         }
         "lofive" => {}
         "lofive_r1" => {
-            // There's probably something subtly wrong about this, but it works,
-            // so...
-            fs::copy("memory-hifive1-revb.x", out_dir.join("hifive1-memory.x")).unwrap();
-            println!("cargo:rerun-if-changed=memory-hifive1-revb.x");
+            fs::copy("memory-lofive-r1.x", out_dir.join("hifive1-memory.x")).unwrap();
+            println!("cargo:rerun-if-changed=memory-lofive-r1.x");
         }
 
         other => panic!("Unknown board: {}", other),
