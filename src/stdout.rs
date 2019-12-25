@@ -4,7 +4,7 @@ use core::fmt;
 use nb::block;
 use riscv::interrupt;
 use e310x_hal::{
-    serial::{Serial, Tx},
+    serial::{Serial, Tx, Rx},
     gpio::gpio0::{Pin17, Pin16},
     time::Bps,
     clock::Clocks,
@@ -43,17 +43,18 @@ impl core::fmt::Write for SerialWrapper {
 pub fn configure<X, Y>(
     uart: UART0, tx: Pin17<X>, rx: Pin16<Y>,
     baud_rate: Bps, clocks: Clocks
-) {
+) -> Rx<UART0> {
     let tx = tx.into_iof0();
     let rx = rx.into_iof0();
     let serial = Serial::new(uart, (tx, rx), baud_rate, clocks);
-    let (tx, _) = serial.split();
+    let (tx, rx) = serial.split();
 
     interrupt::free(|_| {
         unsafe {
             STDOUT.replace(SerialWrapper(tx));
         }
-    })
+    });
+    return rx;
 }
 
 /// Writes string to stdout
