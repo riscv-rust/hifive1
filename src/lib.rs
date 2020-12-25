@@ -8,6 +8,8 @@ pub use e310x_hal as hal;
 pub mod clock;
 pub use clock::configure as configure_clocks;
 
+pub mod flash;
+
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 pub mod led;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
