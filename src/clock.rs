@@ -6,7 +6,7 @@ use e310x_hal::{
     time::Hertz,
 };
 
-#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
+#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb", feature = "board-redv"))]
 /// Configures clock generation system.
 ///
 /// For HiFive1 and HiFive1 Rev B boards external oscillators are enabled for

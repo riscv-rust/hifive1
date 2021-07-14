@@ -28,7 +28,7 @@ fn main() {
             fs::copy("memory-hifive1.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1.x");
         }
-        "hifive1_revb" => {
+        "hifive1_revb" | "redv" => {
             fs::copy("memory-hifive1-revb.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1-revb.x");
         }

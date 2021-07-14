@@ -18,6 +18,7 @@ nb = "0.1.2"
 [features]
 board-hifive1 = []
 board-hifive1-revb = ["e310x-hal/g002"]
+board-redv = ["e310x-hal/g002"]
 board-lofive = []
 board-lofive-r1 = ["e310x-hal/g002"]
 
