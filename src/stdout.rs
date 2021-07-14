@@ -1,20 +1,18 @@
 //! Stdout based on the UART hooked up to FTDI or J-Link
 
 use core::fmt;
-use nb::block;
-use riscv::interrupt;
 use e310x_hal::{
-    serial::{Serial, Tx, Rx},
-    gpio::gpio0::{Pin17, Pin16},
-    time::Bps,
     clock::Clocks,
     e310x::UART0,
-    prelude::*
+    gpio::gpio0::{Pin16, Pin17},
+    prelude::*,
+    serial::{Rx, Serial, Tx},
+    time::Bps,
 };
-
+use nb::block;
+use riscv::interrupt;
 
 static mut STDOUT: Option<SerialWrapper> = None;
-
 
 struct SerialWrapper(Tx<UART0>);
 
@@ -41,18 +39,19 @@ impl core::fmt::Write for SerialWrapper {
 
 /// Configures stdout
 pub fn configure<X, Y>(
-    uart: UART0, tx: Pin17<X>, rx: Pin16<Y>,
-    baud_rate: Bps, clocks: Clocks
+    uart: UART0,
+    tx: Pin17<X>,
+    rx: Pin16<Y>,
+    baud_rate: Bps,
+    clocks: Clocks,
 ) -> Rx<UART0> {
     let tx = tx.into_iof0();
     let rx = rx.into_iof0();
     let serial = Serial::new(uart, (tx, rx), baud_rate, clocks);
     let (tx, rx) = serial.split();
 
-    interrupt::free(|_| {
-        unsafe {
-            STDOUT.replace(SerialWrapper(tx));
-        }
+    interrupt::free(|_| unsafe {
+        STDOUT.replace(SerialWrapper(tx));
     });
     return rx;
 }

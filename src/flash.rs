@@ -1,7 +1,7 @@
 //! On-board SPI Flash
 
-use e310x_hal::e310x::QSPI0;
 use e310x_hal::clock::Clocks;
+use e310x_hal::e310x::QSPI0;
 
 /// Configure SPI Flash interface to maximum supported speed
 #[inline(always)]

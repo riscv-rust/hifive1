@@ -6,14 +6,14 @@
 //! - Blue = Pin 21
 //!
 //! RedV
-//! - Blue = Pin 4
+//! - Blue = Pin 5
 
-use embedded_hal::digital::v2::OutputPin;
+#[cfg(feature = "board-redv")]
+use e310x_hal::gpio::gpio0::Pin5;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 use e310x_hal::gpio::gpio0::{Pin19, Pin21, Pin22};
-#[cfg(feature = "board-redv")]
-use e310x_hal::gpio::gpio0::{Pin4};
-use e310x_hal::gpio::{Output, Regular, Invert};
+use e310x_hal::gpio::{Invert, Output, Regular};
+use embedded_hal::digital::v2::OutputPin;
 
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 /// Red LED
@@ -29,14 +29,11 @@ pub type BLUE = Pin21<Output<Regular<Invert>>>;
 
 #[cfg(feature = "board-redv")]
 /// Blue LED
-pub type BLUE = Pin4<Output<Regular<Invert>>>;
+pub type BLUE = Pin5<Output<Regular<Invert>>>;
 
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 /// Returns RED, GREEN and BLUE LEDs.
-pub fn rgb<X, Y, Z>(
-    red: Pin22<X>, green: Pin19<Y>, blue: Pin21<Z>
-) -> (RED, GREEN, BLUE)
-{
+pub fn rgb<X, Y, Z>(red: Pin22<X>, green: Pin19<Y>, blue: Pin21<Z>) -> (RED, GREEN, BLUE) {
     let red: RED = red.into_inverted_output();
     let green: GREEN = green.into_inverted_output();
     let blue: BLUE = blue.into_inverted_output();
