@@ -59,8 +59,6 @@ macro_rules! pin {
     ($gpio:ident, led_red) => { $gpio.pin22 };
     ($gpio:ident, led_green) => { $gpio.pin19 };
     ($gpio:ident, led_blue) => { $gpio.pin21 };
-    // #[cfg(feature = "redv")]
-    // ($gpio:ident, led_blue) => { $gpio.pin4 };
 }
 
 #[cfg(feature = "board-redv")]
