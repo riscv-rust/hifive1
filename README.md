@@ -8,11 +8,11 @@
 
 ## Supported Boards
 
-* `hifive1` - use feature `board-hifive1`
-* `hifive1-revb` - use feature `board-hifive1-revb`
-* `redv` - use feature `board-redv`
-* `lofive` - use feature `board-lofive`
-* `lofive-r1` - use feature `board-lofive-r1`
+* [SiFive Hifive1](https://www.sifive.com/boards/hifive1) - use feature `board-hifive1`
+* [SiFive Hifive1 RevB](https://www.sifive.com/boards/hifive1-rev-b) - use feature `board-hifive1-revb`
+* [SparkFun Red-V RedBoard](https://www.sparkfun.com/products/15594) - use feature `board-redv`
+* [lofive1](https://github.com/mwelling/lofive) - use feature `board-lofive`
+* [lofive1-r1](https://github.com/mwelling/lofive) - use feature `board-lofive-r1`
 
 ## [Documentation](https://docs.rs/crate/hifive1)
 
