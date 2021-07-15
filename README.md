@@ -8,11 +8,11 @@
 
 ## Supported Boards
 
-`hifive1` - use feature `board-hifive1`
-`hifive1-revb` - use feature `board-hifive1-revb`
-`redv` - use feature `board-redv`
-`lofive` - use feature `board-lofive`
-`lofive-r1` - use feature `board-lofive-r1`
+* `hifive1` - use feature `board-hifive1`
+* `hifive1-revb` - use feature `board-hifive1-revb`
+* `redv` - use feature `board-redv`
+* `lofive` - use feature `board-lofive`
+* `lofive-r1` - use feature `board-lofive-r1`
 
 ## [Documentation](https://docs.rs/crate/hifive1)
 
