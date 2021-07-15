@@ -10,10 +10,16 @@ pub use clock::configure as configure_clocks;
 
 pub mod flash;
 
-#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
+#[cfg(any(
+    feature = "board-hifive1",
+    feature = "board-hifive1-revb",
+    feature = "board-redv"
+))]
 pub mod led;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
-pub use led::{RED, GREEN, BLUE, rgb, Led};
+pub use led::{rgb, Led, BLUE, GREEN, RED};
+#[cfg(feature = "board-redv")]
+pub use led::{Led, BLUE};
 
 pub mod stdout;
 pub use stdout::configure as configure_stdout;

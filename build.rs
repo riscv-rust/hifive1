@@ -1,18 +1,20 @@
-use std::{env, fs};
 use std::path::PathBuf;
+use std::{env, fs};
 
 fn main() {
     // Put the memory definitions somewhere the linker can find it
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
     println!("cargo:rustc-link-search={}", out_dir.display());
 
-    let boards: Vec<_> = env::vars().filter_map(|(key, _value)| {
-        if key.starts_with("CARGO_FEATURE_BOARD") {
-            Some(key[20..].to_ascii_lowercase())  // Strip 'CARGO_FEATURE_BOARD_'
-        } else {
-            None
-        }
-    }).collect();
+    let boards: Vec<_> = env::vars()
+        .filter_map(|(key, _value)| {
+            if key.starts_with("CARGO_FEATURE_BOARD") {
+                Some(key[20..].to_ascii_lowercase()) // Strip 'CARGO_FEATURE_BOARD_'
+            } else {
+                None
+            }
+        })
+        .collect();
 
     if boards.is_empty() {
         panic!("No board features selected");
@@ -28,7 +30,7 @@ fn main() {
             fs::copy("memory-hifive1.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1.x");
         }
-        "hifive1_revb" => {
+        "hifive1_revb" | "redv" => {
             fs::copy("memory-hifive1-revb.x", out_dir.join("hifive1-memory.x")).unwrap();
             println!("cargo:rerun-if-changed=memory-hifive1-revb.x");
         }
