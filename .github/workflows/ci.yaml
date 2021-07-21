@@ -28,13 +28,6 @@ jobs:
           override: true
       - name: Install all Rust targets for ${{ matrix.rust }}
         run: rustup target install --toolchain=${{ matrix.rust }} x86_64-unknown-linux-gnu riscv32imac-unknown-none-elf riscv64imac-unknown-none-elf riscv64gc-unknown-none-elf
-      - name: Run CI script for x86_64-unknown-linux-gnu under ${{ matrix.rust }}
-        run: |
-          cargo check --target x86_64-unknown-linux-gnu --features board-hifive1
-          cargo check --target x86_64-unknown-linux-gnu --features board-hifive1-revb
-          cargo check --target x86_64-unknown-linux-gnu --features board-redv
-          cargo check --target x86_64-unknown-linux-gnu --features board-lofive
-          cargo check --target x86_64-unknown-linux-gnu --features board-lofive-r1
       - name: Run CI script for riscv32imac-unknown-none-elf under ${{ matrix.rust }}
         run: |
           cargo check --target riscv32imac-unknown-none-elf --features board-hifive1
@@ -42,20 +35,6 @@ jobs:
           cargo check --target riscv32imac-unknown-none-elf --features board-redv
           cargo check --target riscv32imac-unknown-none-elf --features board-lofive
           cargo check --target riscv32imac-unknown-none-elf --features board-lofive-r1
-      - name: Run CI script for riscv64imac-unknown-none-elf under ${{ matrix.rust }}
-        run: |
-          cargo check --target riscv64imac-unknown-none-elf --features board-hifive1
-          cargo check --target riscv64imac-unknown-none-elf --features board-hifive1-revb
-          cargo check --target riscv64imac-unknown-none-elf --features board-redv
-          cargo check --target riscv64imac-unknown-none-elf --features board-lofive
-          cargo check --target riscv64imac-unknown-none-elf --features board-lofive-r1
-      - name: Run CI script for riscv64gc-unknown-none-elf under ${{ matrix.rust }}
-        run: |
-          cargo check --target riscv64gc-unknown-none-elf --features board-hifive1
-          cargo check --target riscv64gc-unknown-none-elf --features board-hifive1-revb
-          cargo check --target riscv64gc-unknown-none-elf --features board-redv
-          cargo check --target riscv64gc-unknown-none-elf --features board-lofive
-          cargo check --target riscv64gc-unknown-none-elf --features board-lofive-r1
 
   # On macOS and Windows, we at least make sure that the crate builds and links.
   build-other:
