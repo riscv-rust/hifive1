@@ -9,6 +9,7 @@ use e310x_hal::{
     serial::{Rx, Serial, Tx},
     time::Bps,
 };
+use embedded_hal::serial::nb::Write;
 use nb::block;
 use riscv::interrupt;
 
