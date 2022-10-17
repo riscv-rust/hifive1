@@ -57,18 +57,18 @@ macro_rules! led_impl {
     ($($LEDTYPE:ident),+) => {
         $(
             impl Led for $LEDTYPE {
-            fn off(&mut self) {
-                self.set_low().unwrap();
-            }
+                fn off(&mut self) {
+                    self.set_low().unwrap();
+                }
 
-            fn on(&mut self) {
-                self.set_high().unwrap();
-            }
+                fn on(&mut self) {
+                    self.set_high().unwrap();
+                }
 
-            fn toggle(&mut self) {
-                ToggleableOutputPin::toggle(self).unwrap();
+                fn toggle(&mut self) {
+                    ToggleableOutputPin::toggle(self).unwrap();
+                }
             }
-        }
         )+
     }
 }
