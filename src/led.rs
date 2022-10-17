@@ -13,7 +13,7 @@ use e310x_hal::gpio::gpio0::Pin5;
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 use e310x_hal::gpio::gpio0::{Pin19, Pin21, Pin22};
 use e310x_hal::gpio::{Invert, Output, Regular};
-use embedded_hal::digital::v2::OutputPin;
+use embedded_hal::digital::v2::{OutputPin, ToggleableOutputPin};
 
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
 /// Red LED
@@ -47,36 +47,34 @@ pub trait Led {
 
     /// Turns the LED on
     fn on(&mut self);
+
+    /// Toggles the LED state
+    fn toggle(&mut self);
 }
 
+/// Macro to implement the Led trait for each of the board LEDs
+macro_rules! led_impl {
+    ($($LEDTYPE:ident),+) => {
+        $(
+            impl Led for $LEDTYPE {
+            fn off(&mut self) {
+                self.set_low().unwrap();
+            }
+
+            fn on(&mut self) {
+                self.set_high().unwrap();
+            }
+
+            fn toggle(&mut self) {
+                ToggleableOutputPin::toggle(self).unwrap();
+            }
+        }
+        )+
+    }
+}
+
+/// Call the macro for each LED
 #[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
-impl Led for RED {
-    fn off(&mut self) {
-        self.set_low().unwrap();
-    }
+led_impl!(RED, GREEN);
 
-    fn on(&mut self) {
-        self.set_high().unwrap();
-    }
-}
-
-#[cfg(any(feature = "board-hifive1", feature = "board-hifive1-revb"))]
-impl Led for GREEN {
-    fn off(&mut self) {
-        self.set_low().unwrap();
-    }
-
-    fn on(&mut self) {
-        self.set_high().unwrap();
-    }
-}
-
-impl Led for BLUE {
-    fn off(&mut self) {
-        self.set_low().unwrap();
-    }
-
-    fn on(&mut self) {
-        self.set_high().unwrap();
-    }
-}
+led_impl!(BLUE);
