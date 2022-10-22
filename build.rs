@@ -43,6 +43,7 @@ fn main() {
     }
 
     fs::copy("hifive1-link.x", out_dir.join("hifive1-link.x")).unwrap();
+    println!("cargo:rerun-if-changed=hifive1-link.x");
 
     // Copy library with flash setup code
     let name = env::var("CARGO_PKG_NAME").unwrap();
