@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Hifive1 (Debug)",
+            // (rev-b) Substitute with the board number
+            "device": "FE310", 
+            "type": "cortex-debug",
+            "preLaunchTask": "build-hifive",
+            // Defined in tasks.json
+            "request": "launch",
+            "servertype": "jlink",
+            // "showDevDebugOutput": "raw",
+            "cwd": "${workspaceRoot}",
+            // Executable to launch
+            "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/hifive1-example",
+            "interface": "jtag",
+            "svdFile": "${workspaceRoot}/hifive.svd",
+            // Set this to point to risc-v gdb path
+            "gdbPath": "${workspaceRoot}/../../Toolchains/riscv32-esp-elf-gcc11_2_0-esp-2022r1-linux-amd64/riscv32-esp-elf/bin/riscv32-esp-elf-gdb", 
+            "toolchainPrefix": "riscv32-esp-elf",
+        },
+    ]
+}
