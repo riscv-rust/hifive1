@@ -17,7 +17,8 @@
             "interface": "jtag",
             "svdFile": "${workspaceRoot}/hifive.svd",
             // Set this to point to risc-v gdb path
-            "gdbPath": "${workspaceRoot}/riscv32-esp-elf-gdb", 
+            "gdbPath": "${workspaceRoot}/../../Toolchains/riscv32-esp-elf-gcc11_2_0-esp-2022r1-linux-amd64/riscv32-esp-elf/bin/riscv32-esp-elf-gdb", // Set this to point to Espressif's GDB version
+            // "gdbPath": "${workspaceRoot}/riscv32-esp-elf-gdb", 
             "toolchainPrefix": "riscv32-esp-elf",
         },
     ]

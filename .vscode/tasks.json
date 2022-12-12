@@ -6,6 +6,9 @@
             "command": "cargo",
             "args": [
                 "build",
+                "--features=\"virq board-redv\"",
+                "--example",
+                "virq"
             ],
             "problemMatcher": [
                 "$rustc"

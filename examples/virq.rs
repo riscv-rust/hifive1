@@ -74,7 +74,7 @@ fn main() -> ! {
         let gpio0_index = 7;
         /* Index 7 is the GPIO0 interrupt source, so we modify it's priority */
         for (i, p) in rplic.priority.iter().enumerate() {
-            if i == gpio0_index {
+            if i > 0 && i < 52 {
                 p.write(|w| w.bits(0xffffffff));
             } else {
                 /* Clear all other priorities */
