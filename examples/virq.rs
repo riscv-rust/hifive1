@@ -14,12 +14,7 @@ This can be applied for all the 52 interrupts declared in e310x/interrupts.rs.
 
 extern crate panic_halt;
 
-use hifive1::{
-    hal::core::plic::Priority,
-    hal::DeviceResources,
-    hal::prelude::*,
-    pin, sprintln,
-};
+use hifive1::{hal::core::plic::Priority, hal::prelude::*, hal::DeviceResources, pin, sprintln};
 
 use riscv::register::mstatus;
 use riscv_rt::entry;
