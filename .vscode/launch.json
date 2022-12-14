@@ -20,7 +20,7 @@
             "interface": "jtag",
             "svdFile": "${workspaceRoot}/hifive.svd",
             // Set this to point to sifive risc-v gdb path 
-            "gdbPath": "${workspaceRoot}/../../../toolchains/sifive/bin/riscv64-unknown-elf-gdb",
+            "gdbPath": "${workspaceRoot}/../../Toolchains/sifive/bin/riscv64-unknown-elf-gdb",
             "toolchainPrefix": "riscv64-unknown-elf",
         },
     ]

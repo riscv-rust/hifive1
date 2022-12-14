@@ -19,6 +19,9 @@ use hifive1::{hal::core::plic::Priority, hal::prelude::*, hal::DeviceResources, 
 use riscv::register::mstatus;
 use riscv_rt::entry;
 
+/* we have chosen the GPIO4 (a.k.a dig12) for this example */
+const GPIO_N : usize = 4;
+
 /* Handler for the GPIO0 interrupt */
 #[no_mangle]
 #[allow(non_snake_case)]
@@ -27,7 +30,7 @@ fn GPIO4() {
     /* Clear the GPIO pending interrupt */
     unsafe {
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
-        gpio_block.fall_ip.write(|w| w.bits(0xffffffff));
+        gpio_block.fall_ip.write(|w| w.bits(1<<GPIO_N));
     }
 }
 
@@ -63,11 +66,11 @@ fn main() -> ! {
     unsafe {
         /* Get raw PLIC pointer */
         let rplic = &*hifive1::hal::e310x::PLIC::ptr();
-        let gpio0_block_start = 7;
         /* Index 7 is the GPIO0 interrupt source start */
+        let gpio0_block_start = 7;
         for (i, p) in rplic.priority.iter().enumerate() {
             /* set priority of our interrupt */
-            if i == gpio0_block_start + 5 {
+            if i == gpio0_block_start + (GPIO_N + 1) {
                 p.write(|w| w.bits(0xffffffff));
             } else {
                 /* Clear all other priorities */
@@ -76,11 +79,11 @@ fn main() -> ! {
         }
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
         /* Enable GPIO fall interrupts */
-        gpio_block.fall_ie.write(|w| w.bits(0xffffffff));
+        gpio_block.fall_ie.write(|w| w.bits(1<<GPIO_N));
         gpio_block.rise_ie.write(|w| w.bits(0x0));
         /* Clear pending interrupts from previous states */
         gpio_block.fall_ip.write(|w| w.bits(0xffffffff));
-        gpio_block.rise_ip.write(|w| w.bits(0x0));
+        gpio_block.rise_ip.write(|w| w.bits(0x0fffffff));
 
         /* Activate global interrupts (mie bit) */
         mstatus::set_mie();
