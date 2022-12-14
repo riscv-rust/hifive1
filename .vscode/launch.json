@@ -16,9 +16,8 @@
             "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/examples/virq",
             "interface": "jtag",
             "svdFile": "${workspaceRoot}/hifive.svd",
-            // Set this to point to risc-v gdb path (this sample uses expressif's toolchain )
-            "gdbPath": "${workspaceRoot}/../../../toolchains/sifive/bin/riscv64-unknown-elf-gdb", // Set this to point to Espressif's GDB version
-            // "gdbPath": "${workspaceRoot}/riscv32-esp-elf-gdb", 
+            // Set this to point to sifive risc-v gdb path 
+            "gdbPath": "${workspaceRoot}/../../../toolchains/sifive/bin/riscv64-unknown-elf-gdb",
             "toolchainPrefix": "riscv64-unknown-elf",
         },
     ]
