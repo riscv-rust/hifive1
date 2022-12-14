@@ -20,7 +20,7 @@ use riscv::register::mstatus;
 use riscv_rt::entry;
 
 /* we have chosen the GPIO4 (a.k.a dig12) for this example */
-const GPIO_N : usize = 4;
+const GPIO_N: usize = 4;
 
 /* Handler for the GPIO0 interrupt */
 #[no_mangle]
@@ -30,7 +30,7 @@ fn GPIO4() {
     /* Clear the GPIO pending interrupt */
     unsafe {
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
-        gpio_block.fall_ip.write(|w| w.bits(1<<GPIO_N));
+        gpio_block.fall_ip.write(|w| w.bits(1 << GPIO_N));
     }
 }
 
@@ -79,7 +79,7 @@ fn main() -> ! {
         }
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
         /* Enable GPIO fall interrupts */
-        gpio_block.fall_ie.write(|w| w.bits(1<<GPIO_N));
+        gpio_block.fall_ie.write(|w| w.bits(1 << GPIO_N));
         gpio_block.rise_ie.write(|w| w.bits(0x0));
         /* Clear pending interrupts from previous states */
         gpio_block.fall_ip.write(|w| w.bits(0xffffffff));
