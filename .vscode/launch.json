@@ -10,6 +10,9 @@
             // Defined in tasks.json
             "request": "launch",
             "servertype": "jlink",
+            // JLink server path
+            // "serverpath": "",
+            // GDB debug output
             // "showDevDebugOutput": "raw",
             "cwd": "${workspaceRoot}",
             // Executable to launch
