@@ -16,20 +16,11 @@ extern crate panic_halt;
 
 use hifive1::{
     hal::core::plic::Priority,
-    hal::core::CorePeripherals,
     hal::DeviceResources,
-    hal::{
-        core::plic::{self, INTERRUPT},
-        e310x::{
-            interrupt::Interrupt,
-            plic::{priority, PRIORITY},
-            GPIO0, PLIC,
-        },
-        gpio::gpio0,
-        prelude::*,
-    },
+    hal::prelude::*,
     pin, sprintln,
 };
+
 use riscv::register::mstatus;
 use riscv_rt::entry;
 

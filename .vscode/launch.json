@@ -16,7 +16,7 @@
             "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/examples/virq",
             "interface": "jtag",
             "svdFile": "${workspaceRoot}/hifive.svd",
-            // Set this to point to risc-v gdb path
+            // Set this to point to risc-v gdb path (this sample uses expressif's toolchain )
             "gdbPath": "${workspaceRoot}/../../Toolchains/riscv32-esp-elf-gcc11_2_0-esp-2022r1-linux-amd64/riscv32-esp-elf/bin/riscv32-esp-elf-gdb", // Set this to point to Espressif's GDB version
             // "gdbPath": "${workspaceRoot}/riscv32-esp-elf-gdb", 
             "toolchainPrefix": "riscv32-esp-elf",
