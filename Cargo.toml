@@ -25,5 +25,9 @@ board-lofive = []
 board-lofive-r1 = ["e310x-hal/g002"]
 virq = ["e310x-hal/virq"]
 
+[[example]]
+name = "virq"
+required-features = ["virq"]
+
 [package.metadata.docs.rs]
 features = ['board-hifive1-revb']

@@ -6,7 +6,7 @@
             // Substitute with the board number
             "device": "FE310", 
             "type": "cortex-debug",
-            "preLaunchTask": "build-hifive",
+            "preLaunchTask": "example-virq",
             // Defined in tasks.json
             "request": "launch",
             "servertype": "jlink",
