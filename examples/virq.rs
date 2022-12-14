@@ -35,8 +35,14 @@ use riscv_rt::entry;
 
 /* Handler for the GPIO0 interrupt */
 #[no_mangle]
-fn GPIO0() {
-    sprintln!("We reached the GPIO0 interrupt!");
+#[allow(non_snake_case)]
+fn GPIO4() {
+    sprintln!("We reached the GPIO4 interrupt!");
+    /* Clear the GPIO pending interrupt */
+    unsafe {
+        let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
+        gpio_block.fall_ip.write(|w| w.bits(0xffffffff));
+    }
 }
 
 /* Code adapted from https://github.com/riscv-rust/riscv-rust-quickstart/blob/interrupt-test/examples/interrupt.rs*/
@@ -60,9 +66,9 @@ fn main() -> ! {
         sysclock,
     );
 
-    /* Set GPIO0 (pin 16) as input */
-    let gpio0 = pin!(gpio, dig16);
-    _ = gpio0.into_pull_up_input();
+    /* Set GPIO4 (pin 12) as input */
+    let gpio4 = pin!(gpio, dig12);
+    _ = gpio4.into_pull_up_input();
 
     /* Wrapper for easy access */
     let mut plic = resources.core_peripherals.plic;
@@ -71,10 +77,11 @@ fn main() -> ! {
     unsafe {
         /* Get raw PLIC pointer */
         let rplic = &*hifive1::hal::e310x::PLIC::ptr();
-        let gpio0_index = 7;
-        /* Index 7 is the GPIO0 interrupt source, so we modify it's priority */
+        let gpio0_block_start = 7;
+        /* Index 7 is the GPIO0 interrupt source start */
         for (i, p) in rplic.priority.iter().enumerate() {
-            if i > 0 && i < 52 {
+            /* set priority of our interrupt */
+            if i == gpio0_block_start + 5 {
                 p.write(|w| w.bits(0xffffffff));
             } else {
                 /* Clear all other priorities */
@@ -84,8 +91,10 @@ fn main() -> ! {
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
         /* Enable GPIO fall interrupts */
         gpio_block.fall_ie.write(|w| w.bits(0xffffffff));
-        /* Clear pending interrupts */
+        gpio_block.rise_ie.write(|w| w.bits(0x0));
+        /* Clear pending interrupts from previous states */
         gpio_block.fall_ip.write(|w| w.bits(0xffffffff));
+        gpio_block.rise_ip.write(|w| w.bits(0x0));
 
         /* Activate global interrupts (mie bit) */
         mstatus::set_mie();

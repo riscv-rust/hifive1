@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Hifive1 (Debug)",
-            // (rev-b) Substitute with the board number
+            // Substitute with the board number
             "device": "FE310", 
             "type": "cortex-debug",
             "preLaunchTask": "build-hifive",
@@ -13,7 +13,7 @@
             // "showDevDebugOutput": "raw",
             "cwd": "${workspaceRoot}",
             // Executable to launch
-            "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/hifive1-example",
+            "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/examples/virq",
             "interface": "jtag",
             "svdFile": "${workspaceRoot}/hifive.svd",
             // Set this to point to risc-v gdb path
