@@ -1,5 +1,5 @@
 [target.riscv32imac-unknown-none-elf]
-runner = "../../Toolchains/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14/bin/riscv64-unknown-elf-gdb -q -x gdb_init"
+runner = "../../../toolchains/sifive/bin/riscv64-unknown-elf-gdb -q -x gdb_init"
 rustflags = [
   "-C", "link-arg=-Thifive1-link.x",
 ]
