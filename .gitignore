@@ -2,3 +2,5 @@ Cargo.lock
 target/
 core
 .gdb_history
+.vscode/.cortex-debug.peripherals.state.json
+.vscode/.cortex-debug.registers.state.json

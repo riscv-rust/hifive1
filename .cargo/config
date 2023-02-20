@@ -1,0 +1,8 @@
+[target.riscv32imac-unknown-none-elf]
+runner = "../../Toolchains/sifive/bin/riscv64-unknown-elf-gdb -q -x gdb_init"
+rustflags = [
+  "-C", "link-arg=-Thifive1-link.x",
+]
+
+[build]
+target = "riscv32imac-unknown-none-elf"

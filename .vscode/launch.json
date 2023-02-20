@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Hifive1 (Debug)",
+            // Substitute with the board number
+            "device": "FE310", 
+            "type": "cortex-debug",
+            "preLaunchTask": "example-virq",
+            // Defined in tasks.json
+            "request": "launch",
+            "servertype": "jlink",
+            // JLink server path
+            // "serverpath": "",
+            // GDB debug output
+            // "showDevDebugOutput": "raw",
+            "cwd": "${workspaceRoot}",
+            // Executable to launch
+            "executable": "${workspaceRoot}/target/riscv32imac-unknown-none-elf/debug/examples/virq",
+            "interface": "jtag",
+            "svdFile": "${workspaceRoot}/hifive.svd",
+            // Set this to point to sifive risc-v gdb path 
+            "gdbPath": "${workspaceRoot}/../../Toolchains/sifive/bin/riscv64-unknown-elf-gdb",
+            "toolchainPrefix": "riscv64-unknown-elf",
+        },
+    ]
+}

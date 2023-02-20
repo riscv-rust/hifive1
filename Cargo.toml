@@ -10,10 +10,12 @@ license = "ISC"
 edition = "2018"
 
 [dependencies]
-e310x-hal = "0.9.1"
+e310x-hal = {git = "https://github.com/greenlsi/e310x-hal"}
 embedded-hal = "0.2.5"
 riscv = "0.6.0"
+riscv-rt = "0.10.0"
 nb = "1.0.0"
+panic-halt = "0.2.0"
 
 [features]
 board-hifive1 = []
@@ -21,6 +23,11 @@ board-hifive1-revb = ["e310x-hal/g002"]
 board-redv = ["e310x-hal/g002"]
 board-lofive = []
 board-lofive-r1 = ["e310x-hal/g002"]
+virq = ["e310x-hal/virq"]
+
+[[example]]
+name = "virq"
+required-features = ["virq"]
 
 [package.metadata.docs.rs]
 features = ['board-hifive1-revb']
