@@ -10,9 +10,9 @@ license = "ISC"
 edition = "2018"
 
 [dependencies]
-e310x-hal = "0.9.1"
-embedded-hal = "0.2.5"
-riscv = "0.6.0"
+e310x-hal = "0.9.3"
+embedded-hal = "0.2.7"
+riscv = "0.10.1"
 nb = "1.0.0"
 
 [features]
