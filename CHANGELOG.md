@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.11.0] - 2023-03-03
+
 ### Changed
 - Updated riscv dependency to v0.10 with interrupt/critical section changes
 
