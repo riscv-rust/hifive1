@@ -8,6 +8,7 @@ description = "Board support crate for HiFive1 and LoFive boards"
 keywords = ["riscv", "register", "peripheral"]
 license = "ISC"
 edition = "2018"
+rust-version = "1.59"
 
 [dependencies]
 e310x-hal = "0.9.3"
