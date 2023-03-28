@@ -1,4 +1,4 @@
-INCLUDE memory-fe310.x
+INCLUDE device.x
 MEMORY
 {
     FLASH : ORIGIN = 0x20000000, LENGTH = 4M

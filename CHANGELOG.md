@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.12.0] - 2023-03-28
+- Update e310x-hal to v0.11 with new svd2rust generated code
+
 ## [v0.11.0] - 2023-03-03
 
 ### Changed
