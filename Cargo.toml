@@ -1,6 +1,6 @@
 [package]
 name = "hifive1"
-version = "0.11.0"
+version = "0.12.0"
 repository = "https://github.com/riscv-rust/hifive1"
 authors = ["David Craven <david@craven.ch>"]
 categories = ["embedded", "hardware-support", "no-std"]
@@ -11,7 +11,7 @@ edition = "2018"
 rust-version = "1.59"
 
 [dependencies]
-e310x-hal = "0.9.3"
+e310x-hal = "0.11.0"
 embedded-hal = "0.2.7"
 riscv = "0.10.1"
 nb = "1.0.0"
