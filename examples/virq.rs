@@ -14,7 +14,7 @@ This can be applied for all the 52 interrupts declared in e310x/interrupts.rs.
 
 extern crate panic_halt;
 
-use hifive1::{hal::core::plic::Priority, hal::prelude::*, hal::DeviceResources, pin, sprintln};
+use hifive1::{ hal::prelude::*, hal::DeviceResources, pin, sprintln};
 
 use riscv::register::mstatus;
 use riscv_rt::entry;
@@ -65,18 +65,11 @@ fn main() -> ! {
     /* Unsafe block */
     unsafe {
         /* Get raw PLIC pointer */
-        let rplic = &*hifive1::hal::e310x::PLIC::ptr();
-        /* Index 7 is the GPIO0 interrupt source start */
-        let gpio0_block_start = 7;
-        for (i, p) in rplic.priority.iter().enumerate() {
-            /* set priority of our interrupt */
-            if i == gpio0_block_start + (GPIO_N + 1) {
-                p.write(|w| w.bits(0xffffffff));
-            } else {
-                /* Clear all other priorities */
-                p.write(|w| w.bits(0));
-            }
-        }
+        //let rplic = &*hifive1::hal::e310x::PLIC::ptr();
+        hifive1::hal::e310x::PLIC::set_priority(
+            &mut plic,
+            hifive1::hal::e310x::Interrupt::GPIO4,
+            e310x_hal::e310x::Priority::P7);
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
         /* Enable GPIO fall interrupts */
         gpio_block.fall_ie.write(|w| w.bits(1 << GPIO_N));
@@ -87,8 +80,8 @@ fn main() -> ! {
 
         /* Activate global interrupts (mie bit) */
         mstatus::set_mie();
-        plic.threshold.set(Priority::P1);
-        plic.mext.enable();
+        plic.set_threshold(e310x_hal::e310x::Priority::P1);
+        plic.enable_interrupt(hifive1::hal::e310x::Interrupt::GPIO4);
     }
     loop {}
 }
