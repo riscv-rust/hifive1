@@ -14,7 +14,7 @@ This can be applied for all the 52 interrupts declared in e310x/interrupts.rs.
 
 extern crate panic_halt;
 
-use hifive1::{ hal::prelude::*, hal::DeviceResources, pin, sprintln};
+use hifive1::{hal::prelude::*, hal::DeviceResources, pin, sprintln};
 
 use riscv::register::mstatus;
 use riscv_rt::entry;
@@ -56,8 +56,9 @@ fn main() -> ! {
     );
 
     /* Set GPIO4 (pin 12) as input */
-    let gpio4 = pin!(gpio, dig12);
-    _ = gpio4.into_pull_up_input();
+    // let gpio4 = pin!(gpio, dig12);
+    let input = gpio.pin4.into_pull_up_input();
+    //let input = gpio4.into_pull_up_input();
 
     /* Wrapper for easy access */
     let mut plic = resources.core_peripherals.plic;
@@ -69,7 +70,8 @@ fn main() -> ! {
         hifive1::hal::e310x::PLIC::set_priority(
             &mut plic,
             hifive1::hal::e310x::Interrupt::GPIO4,
-            e310x_hal::e310x::Priority::P7);
+            e310x_hal::e310x::Priority::P7,
+        );
         let gpio_block = &*hifive1::hal::e310x::GPIO0::ptr();
         /* Enable GPIO fall interrupts */
         gpio_block.fall_ie.write(|w| w.bits(1 << GPIO_N));
