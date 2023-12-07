@@ -23,6 +23,7 @@ board-hifive1-revb = ["e310x-hal/g002"]
 board-redv = ["e310x-hal/g002"]
 board-lofive = []
 board-lofive-r1 = ["e310x-hal/g002"]
+v-extern = ["e310x-hal/v-extern"]
 
 [[example]]
 name = "virq"
