@@ -11,7 +11,6 @@ edition = "2018"
 
 [dependencies]
 e310x-hal = {git = "https://github.com/greenlsi/e310x-hal"}
-e310x = {git = "https://github.com/greenlsi/e310x"}
 embedded-hal = "0.2.5"
 riscv = "0.6.0"
 riscv-rt = "0.11.0"
@@ -24,7 +23,6 @@ board-hifive1-revb = ["e310x-hal/g002"]
 board-redv = ["e310x-hal/g002"]
 board-lofive = []
 board-lofive-r1 = ["e310x-hal/g002"]
-v-extern = ["e310x/v-extern"]
 
 [[example]]
 name = "virq"
